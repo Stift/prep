@@ -6,8 +6,8 @@ using developwithpassion.specifications.extensions;
 using developwithpassion.specifications.rhinomocks;
 using prep.collections;
 using prep.infrastructure;
+using prep.ranges;
 using prep.specs.utility;
-
 /* The following set of Context/Specification pairs are in place to specify the functionality that you need to complete for the MovieLibrary class.
  * MovieLibrary is an collection of Movie. It exposes the ability to search,sort, and iterate over all of the movies that it contains.
  * The current implementation of MovieLibrary has almost all of its methods throwing a NotImplementedException. Your job is to get all of the Contexts and their
@@ -246,15 +246,16 @@ namespace prep.specs
 
       It should_be_able_to_find_all_movies_published_between_a_certain_range_of_years = () =>
       {
-        var criteria = Match<Movie>.with_attribute(x => x.date_published.Year)
-          .between(1982,2003);
+          var range = RangeFactory.start_from(1982).inclusive.ends_at(2003).inclusive;
+        var criteria = Match<Movie>.with_attribute(x => x.date_published.Year).falls_in(range);
+          //.between(1982,2003);
 
         var results = sut.all_movies().filter(criteria);
 
         results.ShouldContainOnly(indiana_jones_and_the_temple_of_doom, a_bugs_life, pirates_of_the_carribean);
       };
 
-      It should_be_able_to_find_all_kid_movies = () =>
+        It should_be_able_to_find_all_kid_movies = () =>
       {
         var criteria = Match<Movie>.with_attribute(x => x.genre)
           .equal_to(Genre.kids);
