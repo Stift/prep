@@ -23,7 +23,7 @@ namespace prep.collections
 
     public static IMatchA<ItemToMatch> for_value_matcher<ItemToMatch, AttributeType>(this MatchCreationExtensionPoint<ItemToMatch,AttributeType> extension_point, IMatchA<AttributeType> value_condition)
     {
-      return new AttributeMatch<ItemToMatch, AttributeType>(extension_point.accessor, value_condition);
+      return new AttributeMatch<ItemToMatch, AttributeType>(extension_point.accessor, extension_point.negate, value_condition);
     }
 
     public static IMatchA<ItemToMatch> for_condition<ItemToMatch, AttributeType>(this MatchCreationExtensionPoint<ItemToMatch,AttributeType> extension_point, Predicate<ItemToMatch> condition)

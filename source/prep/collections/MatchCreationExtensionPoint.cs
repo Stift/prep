@@ -2,15 +2,24 @@
 
 namespace prep.collections
 {
-  public class MatchCreationExtensionPoint<ItemToMatch, AttributeType>
-  {
-    public IGetTheValueOfAnAttribute<ItemToMatch, AttributeType> accessor { get; set; }
-
-    public MatchCreationExtensionPoint(IGetTheValueOfAnAttribute<ItemToMatch, AttributeType> accessor)
+    public class MatchCreationExtensionPoint<ItemToMatch, AttributeType>
     {
-      this.accessor = accessor;
-    }
+        public bool negate;
+        public IGetTheValueOfAnAttribute<ItemToMatch, AttributeType> accessor { get; set; }
+        public MatchCreationExtensionPoint<ItemToMatch, AttributeType> not
+        {
+            get
+            {
+                negate = !negate;
+                return this;
+            }
+        }
 
-     
-  }
+        public MatchCreationExtensionPoint(IGetTheValueOfAnAttribute<ItemToMatch, AttributeType> accessor)
+        {
+            this.accessor = accessor;
+        }
+
+
+    }
 }
