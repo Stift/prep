@@ -9,6 +9,7 @@ using prep.extensions;
 using prep.matching;
 using prep.matching_core;
 using prep.ranges;
+using prep.sorting;
 using prep.specs.utility;
 
 /* The following set of Context/Specification pairs are in place to specify the functionality that you need to complete for the MovieLibrary class.
@@ -296,7 +297,8 @@ namespace prep.specs
       It should_be_able_to_sort_all_movies_by_title_descending = () =>
       {
         var comparison = Sort<Movie>.by(x => x.title, SortOrders.descending);
-        var results = sut.sort_all_movies_by_title_descending();
+        var results = sut.all_movies().sort(comparison);
+        //var results = sut.sort_all_movies_by_title_descending();
 
         results.ShouldContainOnlyInOrder(yours_mine_and_ours, theres_something_about_mary, shrek,
           pirates_of_the_carribean, indiana_jones_and_the_temple_of_doom,
