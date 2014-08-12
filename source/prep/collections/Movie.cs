@@ -37,5 +37,10 @@ namespace prep.collections
         return hashCode;
       }
     }
+
+      public override string ToString()
+      {
+          return title;
+      }
   }
 }
